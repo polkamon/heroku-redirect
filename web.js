@@ -2,11 +2,12 @@ var express = require('express');
 var app = express();
 
 var newBaseURL = process.env.NEW_BASE_URL || 'http://example.com';
+var newPath = = process.env.NEW_PATH;
 var redirectStatus = parseInt(process.env.REDIRECT_STATUS || 302);
 var port = process.env.PORT || 5000;
 
 app.get('*', function(request, response) {
-  response.redirect(redirectStatus, newBaseURL + request.url);
+  response.redirect(redirectStatus, newBaseURL + (newPath || request.url));
 });
 
 app.listen(port, function() {
